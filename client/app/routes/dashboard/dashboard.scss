@@ -2,4 +2,26 @@
 @import "../../core/mixins";
 
 dashboard {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    float: left;
+    flex-flow: column;
+
+    canvas {
+        display: inline-block;
+    }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 32px;
+        display: inline-block;
+        margin-bottom: 15px;
+        font-weight: normal;
+        font-family: "Geomanist";
+    }
 }

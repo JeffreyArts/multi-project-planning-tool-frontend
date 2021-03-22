@@ -1,7 +1,7 @@
 {
-  "name": "warp-angular-seed",
+  "name": "threejs-experiment",
   "version": "1.0.0",
-  "description": "Starter for angular projects",
+  "description": "repo with threejs experiments",
   "main": "gulpfile.babel.js",
   "bin": {
     "ng1": "./node_modules/.bin/ng1"
@@ -18,7 +18,8 @@
     "angular-ui-router": "^0.4.2",
     "font-awesome": "^4.7.0",
     "lodash-es": "^4.17.4",
-    "ng-component-routing": "^1.0.12"
+    "ng-component-routing": "^1.0.12",
+    "three": "^0.126.1"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -40,7 +41,6 @@
     "eslint-config-warp": "^1.2.0",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
-    "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.26.0",
