@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 //IMPORTS
+import './cura-world/cura-world';
 import './orbit-controls/orbit-controls';
 import './lighting-first-base/lighting-first-base';
 import './rotating-camera/rotating-camera';
@@ -13,6 +14,7 @@ const routes = angular.module('app.routes', [
   'app.routes.rotatingCamera',
   'app.routes.lightingFirstBase',
   'app.routes.orbitControls',
+  'app.routes.curaWorld',
 ]);
 
 export default routes;
