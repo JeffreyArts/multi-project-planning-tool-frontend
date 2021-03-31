@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 //IMPORTS
+import './orbit-controls/orbit-controls';
 import './lighting-first-base/lighting-first-base';
 import './rotating-camera/rotating-camera';
 import './drawing-lines/drawing-lines';
@@ -11,6 +12,7 @@ const routes = angular.module('app.routes', [
   'app.routes.drawingLines',
   'app.routes.rotatingCamera',
   'app.routes.lightingFirstBase',
+  'app.routes.orbitControls',
 ]);
 
 export default routes;
