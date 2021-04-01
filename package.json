@@ -19,7 +19,7 @@
     "font-awesome": "^4.7.0",
     "lodash-es": "^4.17.4",
     "ng-component-routing": "^1.0.12",
-    "three": "^0.126.1"
+    "three-csg-ts": "^2.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",

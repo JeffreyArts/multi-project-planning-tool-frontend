@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 //IMPORTS
+import './csg/csg';
 import './cura-world/cura-world';
 import './orbit-controls/orbit-controls';
 import './lighting-first-base/lighting-first-base';
@@ -15,6 +16,7 @@ const routes = angular.module('app.routes', [
   'app.routes.lightingFirstBase',
   'app.routes.orbitControls',
   'app.routes.curaWorld',
+  'app.routes.csg',
 ]);
 
 export default routes;
