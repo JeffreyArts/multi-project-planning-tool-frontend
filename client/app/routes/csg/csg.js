@@ -65,7 +65,7 @@ const controller = function($element) {
     const gridPrimary    = new THREE.LineSegments( gridPrimaryG, gridPrimaryM );
 
     const floorShadowGeometry  = new THREE.BoxGeometry(dimensions.width,.001,dimensions.depth);
-    const floorShadowMaterial  = new THREE.ShadowMaterial({opacity: .8});
+    const floorShadowMaterial  = new THREE.ShadowMaterial({opacity: .667});
     const floorShadow          = new THREE.Mesh( floorShadowGeometry, floorShadowMaterial );
     floorShadowMaterial.blending = THREE.NormalBlending;
 
@@ -103,12 +103,14 @@ const controller = function($element) {
     cube3.material = cubeMaterial;
 
     const ambientLight      = new THREE.AmbientLight( "#fffaea", .2);
-    const spotLight         = new THREE.SpotLight("#fffaea", dimensions.height/10*2, dimensions.width*dimensions.depth/2 ,Math.PI/360*180 ,0);
+    const spotLight         = new THREE.SpotLight("#fffaea", dimensions.height/10*2, dimensions.width*dimensions.depth/2 ,Math.PI/360*120 ,0);
     const controls          = new OrbitControls( camera, renderer.domElement );
 
     $element[0].appendChild( renderer.domElement );
 
     cube.castShadow = true;
+    cube2.castShadow = true;
+    cube3.castShadow = true;
     cube.position.y = .5;
 
 
@@ -118,9 +120,9 @@ const controller = function($element) {
     pedestal.position.z -= .005;
 
     floorShadow.receiveShadow = true;
-    floorShadow.position.y = floor.position.y+0.01;
+    floorShadow.position.y = floor.position.y+0.02;
     grid.position.y = floor.position.y + .01;
-    gridPrimary.position.y = floor.position.y +0.02;
+    gridPrimary.position.y = floor.position.y +0.01;
 
     spotLight.castShadow = true;
     spotLight.shadow.mapSize.width = 1024; // default
@@ -128,7 +130,7 @@ const controller = function($element) {
     spotLight.shadow.camera.near = 1;
     spotLight.shadow.camera.far = 100;
     spotLight.shadow.camera.fov = 30;
-
+    
     spotLight.position.x = 0
     spotLight.position.y = dimensions.height*1.5
     spotLight.position.z = 0

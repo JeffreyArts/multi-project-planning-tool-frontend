@@ -23,7 +23,7 @@ const controller = function($element) {
     pedestal.position.y = -5.5;
 
     const geometry = new THREE.BoxGeometry(1,1,1);
-    const material = new THREE.MeshLambertMaterial( { color: "#96f" } );
+    const material = new THREE.MeshLambertMaterial( { color: "#fe6401" } );
     const cube = new THREE.Mesh( geometry, material );
 
     cube.castShadow = true;

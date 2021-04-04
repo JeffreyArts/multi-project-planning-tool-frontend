@@ -3,4 +3,12 @@
 
 csg {
   display: block;
+  span {
+      display: inline-block;
+      margin-bottom: 30px;
+  }
+  strong {
+      font-weight: bold;
+      font-size: 1.2em;
+  }
 }

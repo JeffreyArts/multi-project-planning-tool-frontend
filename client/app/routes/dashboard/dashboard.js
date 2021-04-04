@@ -15,7 +15,7 @@ const controller = function($element) {
     $element[0].appendChild( renderer.domElement );
 
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial( { color: "#96f" } );
+    const material = new THREE.MeshBasicMaterial( { color: "#fe6401" } );
     const cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
@@ -25,7 +25,7 @@ const controller = function($element) {
         cube.rotation.x += 0.01;
         cube.rotation.y += 0.01;
 
-        
+
     	requestAnimationFrame( animate );
     	renderer.render( scene, camera );
     }

@@ -19,7 +19,7 @@ const controller = function($element) {
 
     const scene = new THREE.Scene();
 
-    const material = new THREE.LineBasicMaterial( { color: "#0000ff" } );
+    const material = new THREE.LineBasicMaterial( { color: "#fe6401" } );
     const points = [];
     points.push( new THREE.Vector3( - 10, 0, 0 ) );
     points.push( new THREE.Vector3( 0, 10, 0 ) );

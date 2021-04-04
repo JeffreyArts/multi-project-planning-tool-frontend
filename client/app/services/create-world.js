@@ -53,7 +53,7 @@ const createWorldService = function() {
 
         // Lights
         const ambientLight      = new THREE.AmbientLight( "#fffaea", .2);
-        const spotLight         = new THREE.SpotLight("#fffaea", dimensions.height/10*2, dimensions.width*dimensions.depth/2 ,Math.PI/360*180 ,0);
+        const spotLight         = new THREE.SpotLight("#fff", dimensions.height/10*2, dimensions.width*dimensions.depth/2 ,Math.PI/360*120 ,0);
 
         pedestal.receiveShadow = false;
         pedestal.position.y = dimensions.height/2+.01;
@@ -61,9 +61,9 @@ const createWorldService = function() {
         pedestal.position.z -= .005;
 
         floorShadow.receiveShadow = true;
-        floorShadow.position.y = floor.position.y+0.01;
+        floorShadow.position.y = floor.position.y+0.02;
         grid.position.y = floor.position.y + .01;
-        gridPrimary.position.y = floor.position.y +0.02;
+        gridPrimary.position.y = floor.position.y +0.01;
 
         spotLight.castShadow = true;
         spotLight.shadow.mapSize.width = 1024; // default
@@ -78,7 +78,7 @@ const createWorldService = function() {
         spotLight.lookAt(0,0,0)
 
         // scene.add( ambientLight, spotLight );
-        scene.add( pedestal, floor, floorShadow, grid, gridPrimary, ambientLight, spotLight );
+        scene.add( /*pedestal,*/ floor, floorShadow, grid, gridPrimary, ambientLight, spotLight );
 
     }
 

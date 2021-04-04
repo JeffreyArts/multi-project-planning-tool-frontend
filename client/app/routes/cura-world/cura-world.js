@@ -71,7 +71,7 @@ const controller = function($element) {
     const cube              = new THREE.Mesh( geometry, material );
 
     const ambientLight      = new THREE.AmbientLight( "#fffaea", .2);
-    const spotLight         = new THREE.SpotLight("#fffaea", dimensions.height/10*2, dimensions.width*dimensions.depth/2 ,Math.PI/360*180 ,0);
+    const spotLight         = new THREE.SpotLight("#fffaea", dimensions.height/10*2, dimensions.width*dimensions.depth/2 ,Math.PI/360*120 ,0);
     const controls          = new OrbitControls( camera, renderer.domElement );
 
     $element[0].appendChild( renderer.domElement );
@@ -86,9 +86,9 @@ const controller = function($element) {
     pedestal.position.z -= .005;
 
     floorShadow.receiveShadow = true;
-    floorShadow.position.y = floor.position.y+0.01;
+    floorShadow.position.y = floor.position.y+0.02;
     grid.position.y = floor.position.y + .01;
-    gridPrimary.position.y = floor.position.y +0.02;
+    gridPrimary.position.y = floor.position.y +0.01;
 
     spotLight.castShadow = true;
     spotLight.shadow.mapSize.width = 1024; // default

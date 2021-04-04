@@ -2,5 +2,8 @@
 @import "../../core/mixins";
 
 polyline-test {
-  display: block;
+    display: block;
+    button {
+        margin-bottom: 30px;
+    }
 }

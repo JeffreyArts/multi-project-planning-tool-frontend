@@ -1,0 +1,46 @@
+@import "../../core/constants";
+@import "../../core/mixins";
+
+
+menu {
+    width: 20%;
+    display: flex;
+    height: 100vh;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    margin: 0;
+    justify-content: center;
+    // align-items: center;
+    flex-flow: column;
+    position: relative;
+    z-index: 1000;
+    background-color: rgba(255,255,255,.1);
+
+    ol {
+        padding-left: 0;
+        margin: auto;
+        display: inline-block;
+    }
+    h2 {
+        font-size:32px;
+        display: inline-block;
+        span {
+            font-size: .6em;
+            letter-spacing: 1.5px;
+            padding-left: 1.5px;
+            transform: translateY(-7px);
+            display: inline-block;
+        }
+    }
+    li {
+        line-height: 2.2em;
+        font-size:16px;
+        cursor: pointer;
+
+        &.__isActive {
+            color: #ff7e2b;
+            font-weight: bold;
+        }
+    }
+}
+

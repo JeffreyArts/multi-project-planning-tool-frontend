@@ -44,8 +44,8 @@ symbols.push(_.merge({}, {
 
 var patternInput = {
     seed: (Math.round(Math.random()*10000)),
-    width: 10,
-    height: 10,
+    width: 8,
+    height: 8,
     symbols: symbols,
     algorithm: {
         type: "default",
@@ -53,21 +53,19 @@ var patternInput = {
         mirrorY: 1,
         drawConnectLines: true,
         mask: [
-            [ 1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-            [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [ 0, 0, 0, 1, 0, 0, 1, 0, 0, 0],
-            [ 0, 0, 0, 1, 0, 0, 1, 0, 0, 0],
-            [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-            [ 1, 1, 1, 1, 0, 0, 1, 1, 1, 1]
+            [  1, 1, 0, 0, 0, 0, 1, 1],
+            [  1, 0, 0, 0, 0, 0, 0, 1],
+            [  0, 0, 0, 0, 0, 0, 0, 0],
+            [  0, 0, 0, 0, 0, 0, 0, 0],
+            [  0, 0, 0, 0, 0, 0, 0, 0],
+            [  0, 0, 0, 0, 0, 0, 0, 0],
+            [  1, 0, 0, 0, 0, 0, 0, 1],
+            [  1, 1, 0, 0, 0, 0, 1, 1]
         ],
     }
 };
 
-const createLine = (polylines, type = "box", options = {tube: false}) => {
+const createLine = (polylines, type = "box", options = {tube: false, shadow: false}) => {
     var result = new THREE.Group();
     type = _.isUndefined(type) ? "box" : type
     if (type.indexOf["box", "cylinder"] == -1) {
@@ -149,10 +147,11 @@ const createLine = (polylines, type = "box", options = {tube: false}) => {
                 geometry.translate(xOffset, thickness, zOffset)
             }
 
-            var r = 40 + Math.floor(Math.random()*180)
-            var g = 40//Math.floor(Math.random()*255)
-            var b = 40//Math.floor(Math.random()*255)
+            var r = 255 - Math.floor(Math.random()*20)
+            var g = 60 + Math.floor(Math.random()*50)
+            var b = 0//Math.floor(Math.random()*255)
             var mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: `rgb(${r},${g},${b})` } ))
+            mesh.castShadow = !_.isUndefined(options.shadow) ? options.shadow : false;
             result.add(mesh)
         });
 
@@ -174,19 +173,20 @@ const controller = function($element, createWorld) {
 
 
     const scene             = new THREE.Scene({background: "#ffffff"});
-    const camera            = new THREE.PerspectiveCamera( 20, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    const camera            = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
     createWorld(dimensions, scene);
 
-
-    var pattern = _.map( vpg(patternInput),polylines => {
-        return _.map(polylines,polyline => {
-            return _.map(polyline, cord => {
-                return {x: cord.x, z: cord.y};
+    const generatePattern = (patternInput) => {
+        return _.map( vpg(patternInput),polylines => {
+            return _.map(polylines,polyline => {
+                return _.map(polyline, cord => {
+                    return {x: cord.x, z: cord.y};
+                })
             })
-        })
-    })[0]
-
+        })[0]
+    }
+    var pattern = generatePattern(patternInput);
     // pattern = [
     //     [{x:0,z:0}, {x:0,z:1}],
     //     [{x:0,z:1}, {x:1,z:1}],
@@ -194,29 +194,21 @@ const controller = function($element, createWorld) {
     //     [{x:1,z:0}, {x:0,z:0}],
     // ]
 
-    var line = createLine(pattern,"cylinder", {thickness: 0.2, segments: 64});
-    // var line = createLine(pattern,"box", {width: .25, height:1});
-    // var line = createLine([
-    //     [{"x":1,"z":2},{"x":1,"z":1}],
-    //     [{"x":2,"z":2},{"x":1,"z":2}],
-    //     [{"x":3,"z":2},{"x":2,"z":2}]
-    // ], { thickness: .5, stepSize:1, tube: true});
+    // var line = createLine(pattern,"cylinder", {thickness: 0.2, segments: 64});
+    var lineGroup = createLine(pattern,"box", {width: .5, height:5});
     // line.position.x -= 1
     // line.position.z -= 1
-    line.position.x -= patternInput.width/2 - .5
-    line.position.z -= patternInput.height/2 - .5
+    lineGroup.position.x -= patternInput.width/2 - .5
+    lineGroup.position.z -= patternInput.height/2 - .5
+    scene.add(lineGroup);
 
-    scene.add(line);
-
-    // line.material = gridMaterial;
 
     // Controls
     const controls = new OrbitControls( camera, renderer.domElement );
     $element[0].appendChild( renderer.domElement );
 
-
     // camera.position.z = dimensions.depth*2.5;
-    camera.position.y = dimensions.height*4;
+    camera.position.y = dimensions.height*2;
 
     controls.update();
 
@@ -232,6 +224,20 @@ const controller = function($element, createWorld) {
         renderer.render( scene, camera );
     }
     animate();
+
+    this.regeneratePattern = () => {
+        // selectedObject = scene.getObjectById(line.id);
+        lineGroup.clear();
+        patternInput.seed = (Math.round(Math.random()*10000));
+        var pattern = generatePattern(patternInput);
+
+        scene.remove( scene.getObjectById(lineGroup.id) );
+        lineGroup = createLine(pattern,"box", {width: .25, height:5});
+        lineGroup.position.x -= patternInput.width/2 - .5
+        lineGroup.position.z -= patternInput.height/2 - .5
+
+        scene.add(lineGroup)
+    }
 
 
 };
