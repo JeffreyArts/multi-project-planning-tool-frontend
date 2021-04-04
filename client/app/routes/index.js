@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 //IMPORTS
+import './polyline-test/polyline-test';
 import './csg/csg';
 import './cura-world/cura-world';
 import './orbit-controls/orbit-controls';
@@ -17,6 +18,7 @@ const routes = angular.module('app.routes', [
   'app.routes.orbitControls',
   'app.routes.curaWorld',
   'app.routes.csg',
+  'app.routes.polylineTest',
 ]);
 
 export default routes;

@@ -19,7 +19,8 @@
     "font-awesome": "^4.7.0",
     "lodash-es": "^4.17.4",
     "ng-component-routing": "^1.0.12",
-    "three-csg-ts": "^2.2.2"
+    "three-csg-ts": "^2.2.2",
+    "visual-pattern-generator": "^0.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
